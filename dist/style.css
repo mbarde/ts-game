@@ -1,0 +1,8 @@
+.ball {
+    background: url('matze.jpg');
+    background-size: contain;
+    border: 10px solid #4370c6;
+    border-radius: 50%;
+    height: 128px;
+    width: 128px;
+}
