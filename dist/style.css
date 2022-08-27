@@ -1,8 +1,20 @@
+body {
+    margin: 0;
+}
+
+#canvas {
+    border: 1px solid lime;
+    height: 100vh;
+    width: 100vw;
+}
+
 .ball {
     background: url('matze.jpg');
     background-size: contain;
     border: 10px solid #4370c6;
     border-radius: 50%;
-    height: 128px;
-    width: 128px;
+}
+
+.ball:hover {
+    opacity: 0.6;
 }

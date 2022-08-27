@@ -1,34 +1,25 @@
-import { AnimatedProperty } from './animation';
+import { Ball } from './ball';
+import { Vector2 } from './vector';
 
 const canvas = document.getElementById('canvas');
 
-const ball = document.createElement('div');
-ball.classList.add('ball');
-ball.style.position = 'absolute';
-
-canvas.append(ball);
-
-let x: number = 0;
-let y: number = 0;
-let rot: number = 0;
+let balls = [
+    new Ball(canvas, new Vector2(10,0), new Vector2(10, 10), 128),
+    new Ball(canvas, new Vector2(100,0), new Vector2(30, 10), 128),
+    new Ball(canvas, new Vector2(0, 100), new Vector2(10, 20), 128),
+    new Ball(canvas, new Vector2(0,200), new Vector2(10, -10), 128),
+    new Ball(canvas, new Vector2(100,100), new Vector2(-20, 10), 128),
+    new Ball(canvas, new Vector2(200,200), new Vector2(10, -20), 128),
+];
 
 let lastTick: number = Date.now();
 
-let size: AnimatedProperty = new AnimatedProperty(1.0, 1.5, 0.001);
-
-const update = (ball: HTMLElement) => {
+const update = () => {
     let now, ticks: number;
     now = Date.now();
     ticks = now - lastTick;
     lastTick = now;
-    x += (ticks / 50);
-    y += (ticks / 40);
-    rot += (ticks / 50);
-    rot = rot > 360 ? rot - 360 : rot;
-    size.update();
-    ball.style.left = `${x}px`;
-    ball.style.top = `${y}px`;
-    ball.style.transform = `rotate(${rot}deg) scale(${size.getValue()})`;
+    balls.map((ball) => ball.update(ticks));
 }
 
-setInterval(() => update(ball), 1);
+setInterval(update, 1);
